@@ -2,6 +2,7 @@ package com.iwinner.jdbc.utils;
 
 import java.io.FileNotFoundException;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -21,14 +22,16 @@ public class DbUtils {
 			return connection;
 		else {
 			try {
-				Properties prop = new Properties();
+				 Properties prop = new Properties();
 				InputStream inputStream = DbUtils.class.getClassLoader().getResourceAsStream("db.properties");
 				prop.load(inputStream);
+				System.out.println(prop);
 				// KEY VALUE (EX: jdbc.driverClassName  Value com.mysql.jdbc.Driver
 				String driver = prop.getProperty("jdbc.driverClassName");
 				String url = prop.getProperty("jdbc.databaseurl");
 				String user = prop.getProperty("jdbc.username");
 				String password = prop.getProperty("jdbc.password");
+			
 				Class.forName(driver);
 				connection = DriverManager.getConnection(url, user, password);
 			} catch (ClassNotFoundException e) {
@@ -53,7 +56,8 @@ public class DbUtils {
 	}
 
 	public static void main(String[] args) {
-		Connection con = getConnection();
+		
+		Connection con=DbUtils.getConnection();
 		System.out.println(con.getClass());//class com.mysql.jdbc.JDBC4Connection
 	}
 }

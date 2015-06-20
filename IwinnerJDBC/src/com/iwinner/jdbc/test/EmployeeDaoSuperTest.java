@@ -8,7 +8,7 @@ public class EmployeeDaoSuperTest {
 		EmployeeDaoImpl emp=new EmployeeDaoImpl();
 
 		// ############### Select Query ###############
-		EmployeeDTO empD=emp.getEmployeeDetails("anji");
+		EmployeeDTO empD=emp.getEmployeeDetails("hbr");
 		System.out.println(empD.getEmpId()+"  "+empD.getEmpDesg()+"  "+empD.getDateOfJoin());
 
 

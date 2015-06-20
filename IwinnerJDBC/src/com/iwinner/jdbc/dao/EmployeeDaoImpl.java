@@ -11,14 +11,16 @@ import com.iwinner.jdbc.utils.DbUtils;
 import com.iwinner.jdbc.utils.IwinnerConstants;
 
 public class EmployeeDaoImpl implements EmployeeDaoIF {
-	private static Logger LOGGER = Logger.getLogger(DbUtils.class);
+
+	private static Logger LOGGER = Logger.getLogger(EmployeeDaoImpl.class);
+	
 	public EmployeeDTO getEmployeeDetails(String empName) {
 	LOGGER.info("##### getEmployeeDetails is stared #####");
 	EmployeeDTO empDTO=new EmployeeDTO();
 	
 	try{
 	Connection conn=DbUtils.getConnection();
-	PreparedStatement pstmt=conn.prepareStatement(IwinnerConstants.SELECT_EMPLOYEE);
+	PreparedStatement pstmt=conn.prepareStatement("SELECT * FROM EMPLOYEE WHERE EMPNAME=?");
 	pstmt.setString(1, empName);
 	LOGGER.debug("input query =["+pstmt+"]");
 	ResultSet rs=pstmt.executeQuery();
@@ -33,13 +35,17 @@ public class EmployeeDaoImpl implements EmployeeDaoIF {
 		LOGGER.error(" Error into getEmployeeDetails()#####"+e.getMessage());
 	}
 	LOGGER.info("##### getEmployeeDetails is ended #####");
-		return empDTO;
+		
+	return empDTO;
+	
 	}
+	
 	public void updateEmployeeDetails(String empName, Float empSal,
 			String empDesg) {
 		try{
 		Connection conn=DbUtils.getConnection();
 		PreparedStatement pstmt=conn.prepareStatement(IwinnerConstants.UPDATE_EMPLOYEE);
+		//UPDATE EMPLOYEE SET EMPDESG =?,EMPSAL=? WHERE EMPNAME=?
 		pstmt.setString(1, empDesg);
 		pstmt.setFloat(2, empSal);
 		pstmt.setString(3, empName);
@@ -55,10 +61,12 @@ public class EmployeeDaoImpl implements EmployeeDaoIF {
 			LOGGER.error(" Error into updateEmployeeDetails()#####"+e.getMessage());
 		}
 	}
+	
 	public void deleteEmployee(String empName){
 		try{
 			Connection conn=DbUtils.getConnection();
 			PreparedStatement pstmt=conn.prepareStatement(IwinnerConstants.DELETE_EMPLOYEE);
+			//DELETE FROM EMPLOYEE WHERE EMPNAME=?
 			pstmt.setString(1, empName);
 			int deleteEmployee=pstmt.executeUpdate();
 			LOGGER.debug("input query =["+pstmt+"]");
