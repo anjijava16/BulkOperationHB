@@ -1,0 +1,29 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.iwinner.indus.admin.dto.Employee" table="EmployeeHb_ONE">
+		<id name="no" column="EID" /> <!-- singular Identity field cfg -->
+		<property name="fname" column="FIRSTNAME" />
+		<property name="lname" column="LASTNAME" />
+		<property name="mail" column="EMAIL" />
+	</class>
+	<query name="hqlQuery">from Employee</query>
+	
+	
+	
+	<sql-query name="sqlQyery">select * from EmployeeHb_ONE</sql-query>
+	
+	
+	<query name="selectIdQuery">
+	 <![CDATA[from Employee e where e.no>=:no]]>
+	</query>
+	
+	<!-- 
+	Regarding the CDATA , it’s always good practice to wrap your query text
+	with CDATA, so that the XML parser will not prompt error for some
+	special XML characters like ‘>’ , <‘ and etc. -->
+	
+	
+</hibernate-mapping>
