@@ -1,5 +1,7 @@
 package com.iwinner.jdbc.dao;
 
+import java.util.List;
+
 import com.iwinner.jdbc.dto.EmployeeDTO;
 
 public interface EmployeeDaoIF {
@@ -12,5 +14,8 @@ public Integer empId(String empName);*/
 public void updateEmployeeDetails(String empName,Float empSal,String empDesg);
 //public Integer updateDetails(String empName,String empDesg);
 public void deleteEmployee(String empName);
+
+public List<EmployeeDTO> listOfEmployees();
+
 
 }

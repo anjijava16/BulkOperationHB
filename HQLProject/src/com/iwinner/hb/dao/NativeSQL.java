@@ -13,6 +13,32 @@ import com.iwinner.hb.utils.HibernateUtils;
 
 public class NativeSQL {
 
+	public static void selectNativeSQL(){
+		SessionFactory sessionFactory = HibernateUtils.sessionFactoryUtil();
+		Session session = sessionFactory.openSession();
+		
+		SQLQuery query=session.createSQLQuery("select * from EmployeeHb_ONE");
+		
+		List lis=query.list();
+		
+		Iterator it=lis.iterator();
+		while(it.hasNext()){
+			Object obj[]=(Object[])it.next();
+			System.out.println(obj[0]+"  "+obj[1]+"  "+obj[2]+"  "+obj[3]);
+		}
+	}
+	
+	public static void selectAddEntitySQL(){
+		SessionFactory sessionFactory = HibernateUtils.sessionFactoryUtil();
+		Session session = sessionFactory.openSession();
+		SQLQuery query=session.createSQLQuery("select * from EmployeeHb_ONE");
+		query.addEntity(Employee.class);
+		List<Employee> listOfEmployees=query.list();
+		for(Employee emp:listOfEmployees){
+			System.out.println(emp.getFname()+"  "+emp.getNo()+"  "+emp.getMail());
+		}
+		
+	}
 
 	public static void selectQueryAddEntity(){
 		SessionFactory sessionFactory = HibernateUtils.sessionFactoryUtil();
@@ -27,10 +53,17 @@ public class NativeSQL {
 	public static void nonSelecQuery(){
 		SessionFactory sessionFactory = HibernateUtils.sessionFactoryUtil();
 		Session session = sessionFactory.openSession();
+
+		// Postinal Parmaeter
+		/* **************************************
 		SQLQuery query=session.createSQLQuery("update   EmployeeHb_ONE set EMAIL=? where EID=?");
 		query.setParameter(0, "azx@gmail.com");
-		query.setParameter(1, 50);
-		
+		query.setParameter(1, 48);
+		*/
+		// Nameed Parameters
+		SQLQuery query=session.createSQLQuery("update   EmployeeHb_ONE set EMAIL=:emailId where EID=:eId");
+		query.setParameter("emailId", "named@gmail.com");
+		query.setParameter("eId",47);
 		Transaction tx=session.beginTransaction();
 		int x=query.executeUpdate();
 		
@@ -54,5 +87,7 @@ public class NativeSQL {
 		//selectQuery();
 		//selectQueryAddEntity();
 		nonSelecQuery();
+		 //selectNativeSQL();
+		//selectAddEntitySQL();
 	}
 }

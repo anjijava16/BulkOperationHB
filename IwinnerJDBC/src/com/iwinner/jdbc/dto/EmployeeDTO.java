@@ -2,7 +2,7 @@ package com.iwinner.jdbc.dto;
 
 import java.util.Date;
 
-public class EmployeeDTO {
+public class EmployeeDTO implements java.io.Serializable{
 
 	private Integer empId;
 	private String empName;

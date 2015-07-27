@@ -12,6 +12,15 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+/**
+ *  it is properity class it containts Db connection details
+ * 
+ * @author anjaiah@Iwinner.com
+ * @version 1.3
+ * 
+ * 
+ *
+ */
 public class DbUtils {
 	private static Logger LOGGER = Logger.getLogger(DbUtils.class);
 	private static Connection connection = null;

@@ -100,6 +100,23 @@ public class CriteriaExample {
 			System.out.println("Id ::"+number+ "Name:::  "+email);
 		}
 	}
+	
+	public static void singleProjectProperty(){
+		SessionFactory sessionFactory = HibernateUtils.sessionFactoryUtil();
+		Session session = sessionFactory.openSession();
+		Criteria crit = session.createCriteria(Employee.class);
+		
+		Projection projection=Projections.property("no");
+		crit.setProjection(projection);
+		
+		List list=crit.list();
+		Iterator it=list.iterator();
+		while(it.hasNext()){
+			Integer id=(Integer)it.next();
+			System.out.println(id);
+		}
+		
+	}
 	// selecting partial Object in critira
 	public static void projectionCritiraForSingleRecord(){
 		SessionFactory sessionFactory = HibernateUtils.sessionFactoryUtil();
@@ -133,6 +150,8 @@ public class CriteriaExample {
 		}
 	}
 	
+	
+	// ** Ordering purpose we are using asc or desc by using Order class 
 	public static void criteriaOrder(){
 		SessionFactory sessionFactory = HibernateUtils.sessionFactoryUtil();
 		Session session = sessionFactory.openSession();
@@ -215,7 +234,6 @@ public class CriteriaExample {
 	public static void main(String[] args) {
 		// criteraSelect();
 		//criteraSelectBasedNames();
-		
 		//criteraSelectNamesAndIdCond();
 		//criteraiNamesSelection();
 		//criteriaOrder();
@@ -223,6 +241,7 @@ public class CriteriaExample {
 		//projectionCritiraForMultiRows();
 		//projectionSizeDetails();
 		//critPagination();
-		critieraIn();
+		//critieraIn();
+		singleProjectProperty();
 	}
 }

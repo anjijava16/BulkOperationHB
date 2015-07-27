@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import com.iwinner.hb.dto.Items;
 import com.iwinner.hb.utils.HibernateUtils;
 
-public class InsertOperation {
+public class InsertOperationUsingHQL {
 
 	public static void main(String[] args) {
 
